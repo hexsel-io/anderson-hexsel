@@ -1,0 +1,31 @@
+# hexsel.io
+
+> Anderson Hexsel — Senior Manager, Cloud & Platform Architect at PwC Canada
+
+Anderson Hexsel is a senior cloud infrastructure leader with 18+ years of experience in enterprise Azure architecture, large-scale cloud migrations, and AI-integrated platform modernization. Currently leading cloud transformation programs for regulated Canadian enterprises at PwC Canada in Toronto.
+
+## About
+
+- Role: Senior Manager — Cloud & Platform Architect
+- Company: PwC Canada, Toronto, ON (Aug 2024 – Present)
+- Experience: 18+ years across enterprise IT, datacenter operations, and Azure cloud
+- Focus: Azure Landing Zones, AI Integration, FinOps, Governance, Cloud Migration
+
+## Services
+
+- **Cloud Architecture**: Azure enterprise landing zones, hub-spoke networking, Private Link, Entra ID, secure hybrid connectivity for regulated environments
+- **Cloud Migration**: Datacenter-to-Azure transformations using Azure Migrate, Site Recovery, custom wave-planning tooling (1,200+ servers delivered)
+- **DevOps & IaC**: CI/CD pipelines, Terraform, Bicep, Azure DevOps, GitHub Actions, AKS
+- **FinOps & Governance**: Cloud operating models, cost governance, SOC 2 / ISO 27001 compliance, PwC Global Cloud standards
+
+## Pages
+
+- [Portfolio](https://hexsel.io/): Main portfolio with experience, services, and contact
+- [Resume](https://hexsel.io/resume.html): Full resume with complete work history, skills, and certifications
+
+## Contact
+
+- Email: anderson@hexsel.io
+- LinkedIn: https://www.linkedin.com/in/hexsel/
+- GitHub: https://github.com/hexsell007
+- Location: Toronto, ON, Canada
