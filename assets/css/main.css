@@ -377,6 +377,7 @@ pre, code { font-family: var(--font-mono); }
 /* ── Terminal ────────────────────────────────────────────────── */
 .terminal {
   background: #0A0908;
+  color: #EDE8E3;
   border: 1px solid var(--border-2);
   border-radius: var(--r-lg);
   overflow: hidden;
@@ -604,6 +605,7 @@ pre, code { font-family: var(--font-mono); }
 /* Code block */
 .code-block {
   background: #0A0908;
+  color: #EDE8E3;
   border: 1px solid var(--border-2);
   border-radius: var(--r-lg);
   overflow: hidden;
