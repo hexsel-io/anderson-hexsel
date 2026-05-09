@@ -322,6 +322,7 @@ pre, code { font-family: var(--font-mono); }
   padding-block: var(--s24);
   width: 100%;
 }
+.hero__inner > * { min-width: 0; }
 
 /* Hero text */
 .hero__eyebrow {
@@ -494,6 +495,7 @@ pre, code { font-family: var(--font-mono); }
   align-items: start;
   margin-bottom: var(--s10);
 }
+.about__body > * { min-width: 0; }
 .about__lede {
   font-size: var(--fs-md);
   line-height: 1.8;
@@ -552,6 +554,7 @@ pre, code { font-family: var(--font-mono); }
   gap: var(--s12);
   align-items: start;
 }
+.ai__body > * { min-width: 0; }
 
 .ai__headline {
   font-family: var(--font-mono);
