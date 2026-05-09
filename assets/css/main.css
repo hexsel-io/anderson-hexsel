@@ -428,10 +428,10 @@ pre, code { font-family: var(--font-mono); }
 
 /* Terminal line types */
 .t-line { display: block; white-space: pre-wrap; word-break: break-all; }
-.t-prompt .t-ps  { color: var(--accent); user-select: none; }
-.t-prompt .t-cmd { color: var(--text); }
-.t-out     { color: var(--green); }
-.t-comment { color: var(--border-2); }
+.t-prompt .t-ps  { color: #D4784A; user-select: none; }
+.t-prompt .t-cmd { color: #EDE8E3; }
+.t-out     { color: #7EB68A; }
+.t-comment { color: #546E7A; }
 .t-err     { color: #F87171; }
 .t-blank   { display: block; height: 0.5em; }
 
@@ -439,7 +439,7 @@ pre, code { font-family: var(--font-mono); }
 .t-cursor {
   display: inline-block;
   width: 7px; height: 0.9em;
-  background: var(--accent);
+  background: #D4784A;
   margin-left: 1px;
   vertical-align: text-bottom;
   animation: cursor-blink 0.9s step-end infinite;
