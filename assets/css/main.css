@@ -274,18 +274,21 @@ pre, code { font-family: var(--font-mono); }
   .nav__toggle { display: flex; }
   .header-actions .btn--outline { display: none; }
   .site-header { position: sticky; }
+  .site-header__inner { justify-content: space-between; }
   .nav {
     position: absolute; top: 100%; left: 0; right: 0;
     flex-direction: column;
+    justify-content: flex-start;
+    z-index: 99;
+  }
+  .nav__list {
+    flex-direction: column; gap: 0; width: 100%; align-items: stretch;
     background: var(--surface);
     border-bottom: 1px solid var(--border);
     overflow: hidden; max-height: 0;
     transition: max-height 300ms ease;
-    justify-content: flex-start;
-    z-index: 99;
   }
   .nav__list.is-open { max-height: 360px; }
-  .nav__list { flex-direction: column; gap: 0; width: 100%; align-items: stretch; }
   .nav__link {
     display: block;
     padding: var(--s4) var(--s5);
