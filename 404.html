@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>404 — Not found · hexsel.io</title>
+  <meta name="description" content="404 — page not found at hexsel.io.">
+  <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('hexsel-theme');
+        if (saved === 'light' || saved === 'dark') {
+          document.documentElement.setAttribute('data-theme', saved);
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+  <main class="hero">
+    <div class="container hero__inner" style="text-align:center">
+      <h1 class="hero__title"><span class="hero__name">404</span><span class="hero__role">Page not found</span></h1>
+      <p class="hero__tagline">That URL didn't match anything on hexsel.io.</p>
+      <div class="hero__cta">
+        <a class="btn btn--primary" href="/">Go home</a>
+      </div>
+    </div>
+  </main>
+  <script src="/assets/js/main.js" defer></script>
+</body>
+</html>
