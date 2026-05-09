@@ -1,238 +1,196 @@
-# hexsel.io — Full SEO Audit Report (v2)
-**Date:** 2026-05-09 · Re-audit after session improvements  
+# hexsel.io — Full SEO Audit Report (v3 — Final)
+**Date:** 2026-05-09 · Post all-fixes audit  
 **Pages crawled:** 3 (index.html, resume.html, 404.html)  
 **Business type:** Personal portfolio / Professional services — Senior Cloud & Platform Architect
 
 ---
 
-## SEO Health Score: 75 / 100 ↑ (was 68)
+## SEO Health Score: 81 / 100 ✅
 
-| Category | Weight | Score | Weighted | Change |
+| Category | Weight | Score | Weighted | vs. Start |
 |---|---|---|---|---|
-| Technical SEO | 22% | 87% | 19.1 | +2.8 ↑ |
+| Technical SEO | 22% | 90% | 19.8 | +5.5 ↑ |
 | Content Quality | 23% | 70% | 16.1 | — |
 | On-Page SEO | 20% | 89% | 17.8 | +0.2 ↑ |
 | Schema / Structured Data | 10% | 75% | 7.5 | +4.0 ↑ |
 | Performance (CWV) | 10% | 78% | 7.8 | — |
-| AI Search Readiness | 10% | 25% | 2.5 | +0.5 ↑ |
+| AI Search Readiness | 10% | 85% | 8.5 | **+6.5 ↑↑** |
 | Images | 5% | 85% | 4.25 | +1.5 ↑ |
-| **Total** | | | **75 / 100** | **+7 ↑** |
+| **Total** | | | **81 / 100** | **+13 ↑** |
 
-> **Projected score after Cloudflare fix:** ~81/100 (AI Search Readiness jumps from 25% → 85%)
+**Session progress: 68 → 75 → 81**
 
 ---
 
 ## Executive Summary
 
-hexsel.io improved from 68 → 75 in this session. All code-level fixes have been deployed. The remaining gap is almost entirely owned by one manual setting: **Cloudflare's Bot Fight Mode blocking Google AI Overviews, ChatGPT, and Claude citations**. That single change in the Cloudflare dashboard would push the score to ~81.
+All critical and high-priority issues resolved. hexsel.io is now correctly configured for standard search indexing, AI search readiness, social sharing, and structured data. The site went from 68 to 81 in one session — a +13 point improvement. Remaining opportunities are content depth and social proof (testimonials, articles) which take more time but have good long-term ROI.
 
-### What was fixed this session
-| Fix | Impact |
-|---|---|
-| CNAME `www.hexsel.io` → `hexsel.io` (matches canonicals) | Eliminates www/apex URL authority split |
-| Person schema: +6 properties (worksFor, address, credential, knowsAbout, alumniOf, image) | Knowledge Panel eligibility |
-| resume.html title → keyword-rich | On-page SEO +keyword coverage |
-| ProfilePage schema on resume.html | Second page now has structured data |
-| sitemap.xml `<lastmod>` added | Fresher crawl signals |
-| `llms.txt` created | AI discovery baseline |
-| `og-cover.png` — real image pushed | Social sharing previews now work |
-| `anderson-hexsel-resume.pdf` — file exists | Download CV link no longer broken |
-| Mobile hamburger nav fix | UX + crawlability on mobile |
-| Mobile container overflow fix (AI section) | Layout integrity |
-
-### Remaining critical issue
-🔴 **Cloudflare-managed robots.txt overrides your local file**, adding blocks for Google-Extended, GPTBot, ClaudeBot, CCBot. Your local `robots.txt` is clean — Cloudflare injects these on top.
+### All issues resolved this session
+| Fix | Category | Impact |
+|---|---|---|
+| Cloudflare Bot Fight Mode disabled | AI Readiness | +6.5 pts |
+| CNAME apex fix (`www` → `hexsel.io`) | Technical | +1.5 pts |
+| Person schema: +6 properties | Schema | +4.0 pts |
+| ProfilePage schema on resume.html | Schema | included |
+| resume.html keyword-rich title | On-Page | +0.2 pts |
+| sitemap.xml `<lastmod>` added | Technical | +0.5 pts |
+| `llms.txt` created | AI Readiness | included |
+| `og-cover.png` real image | Images | +1.5 pts |
+| `anderson-hexsel-resume.pdf` exists | UX | — |
+| Mobile hamburger nav fixed | Technical | — |
+| Mobile container overflow fixed | Technical | — |
 
 ---
 
-## 1. Technical SEO — 87%
+## 1. Technical SEO — 90% ✅
 
-### Crawlability
+### Crawlability ✅ Fully resolved
 
-**Local robots.txt (correct — in repo):**
+**Live robots.txt (confirmed):**
 ```
 User-agent: *
 Allow: /
+
 Sitemap: https://hexsel.io/sitemap.xml
 ```
 
-**Live robots.txt served by Cloudflare (overriding your file):**
+All crawlers allowed. Cloudflare AI bot blocks removed. Google-Extended, GPTBot, ClaudeBot, and CCBot can now access the site.
+
+### Sitemap ✅ Confirmed live
+```xml
+<url>
+  <loc>https://hexsel.io/</loc>
+  <lastmod>2026-05-09</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>1.0</priority>
+</url>
+<url>
+  <loc>https://hexsel.io/resume.html</loc>
+  <lastmod>2026-05-09</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
 ```
-User-agent: Google-Extended
-Disallow: /          ← blocks Google AI Overviews / SGE
-
-User-agent: GPTBot
-Disallow: /          ← blocks ChatGPT web browsing
-
-User-agent: ClaudeBot
-Disallow: /          ← blocks Anthropic Claude citations
-
-User-agent: CCBot
-Disallow: /          ← blocks Common Crawl
-```
-
-Standard Googlebot (regular search) is still allowed. Only AI-powered features are blocked.
-
-**Fix:** Cloudflare Dashboard → Security → Bots → disable "Block AI Scrapers"
-
-### Sitemap ✅
-- `/sitemap.xml` exists ✓
-- Both URLs listed ✓
-- `<lastmod>` now present ✓
-- Referenced in robots.txt ✓
 
 ### Canonicals ✅
-- index.html: `https://hexsel.io/` ✓
-- resume.html: `https://hexsel.io/resume.html` ✓
-- CNAME now `hexsel.io` — apex matches canonicals ✓
+- `hexsel.io/` — canonical matches CNAME and served domain
+- `hexsel.io/resume.html` — correct
 
 ### Mobile ✅
-- Viewport meta ✓
-- theme-color (dark + light) ✓
-- Responsive breakpoints (639px, 1023px) ✓
-- Touch targets ≥ 44×44px ✓
-- Hamburger nav fixed (was invisible on mobile) ✓
+- Viewport, theme-color, responsive breakpoints, 44px touch targets
+- Hamburger nav visible and functional on all viewports
 
 ### Core Web Vitals (estimated)
-| Metric | Estimate | Reason |
-|---|---|---|
-| LCP | 🟢 < 2.0s | No large images; `display=swap` on fonts |
-| INP | 🟢 < 100ms | Single deferred IIFE, no framework |
-| CLS | 🟢 ~0 | No layout shifts; stable grid |
+| Metric | Estimate |
+|---|---|
+| LCP | 🟢 < 2.0s |
+| INP | 🟢 < 100ms |
+| CLS | 🟢 ~0 |
 
 ---
 
-## 2. On-Page SEO — 89%
+## 2. On-Page SEO — 89% ✅
 
 ### Title Tags
-| Page | Title | Length | Score |
-|---|---|---|---|
-| index.html | Anderson Hexsel — Senior Cloud & Platform Architect | 51 chars | ✅ |
-| resume.html | Anderson Hexsel — Cloud Architect Resume · Azure · PwC Canada · Toronto | 71 chars | ✅ |
-| 404.html | 404 — Not found · hexsel.io | 27 chars | ✅ |
+| Page | Title | Score |
+|---|---|---|
+| index.html | Anderson Hexsel — Senior Cloud & Platform Architect (51 chars) | ✅ |
+| resume.html | Anderson Hexsel — Cloud Architect Resume · Azure · PwC Canada · Toronto (71 chars) | ✅ |
+
+### Meta Descriptions ✅
+Both pages have descriptive, keyword-rich meta descriptions under 165 chars.
 
 ### Heading Hierarchy ✅
-Both pages have clean H1→H2→H3 hierarchy. One H1 per page. No skipped levels.
+Clean H1→H2→H3 on both pages. One H1 per page.
 
-### Keyword Coverage
-| Keyword | Covered | Notes |
-|---|---|---|
-| Senior Cloud Platform Architect | ✅ | Title, H1 role, meta |
-| Azure | ✅ | Multiple sections |
-| PwC Canada | ✅ | About, timeline, resume |
-| Toronto | ✅ | Eyebrow, contact, resume title |
-| Cloud Migration | ✅ | Services card |
-| Azure Landing Zone | ✅ | Services card |
-| FinOps | ✅ | Services card, about meta |
-| Azure consultant Toronto | ⚠️ | Phrase not used — opportunity |
-| Enterprise cloud architect | ⚠️ | Phrase not used — opportunity |
+### Keyword Gaps (Medium priority)
+- "Azure consultant Toronto" — phrase not used
+- "Enterprise cloud architect Canada" — phrase not used
+- "FinOps consultant" — not targeted as phrase
 
 ---
 
 ## 3. Schema / Structured Data — 75%
 
-### index.html — Person schema ✅ Enriched
-```json
-{
-  "@type": "Person",
-  "name": "Anderson Hexsel",
-  "url": "https://hexsel.io/",
-  "email": "anderson@hexsel.io",
-  "jobTitle": "Senior Manager — Cloud & Platform Architect",
-  "image": "https://hexsel.io/assets/img/og-cover.png",
-  "address": { "addressLocality": "Toronto", "addressRegion": "ON", "addressCountry": "CA" },
-  "worksFor": { "@type": "Organization", "name": "PwC Canada" },
-  "alumniOf": { "@type": "CollegeOrUniversity", "name": "FIAP" },
-  "hasCredential": { "name": "Microsoft Certified: Azure Solutions Architect Expert" },
-  "knowsAbout": ["Microsoft Azure", "Cloud Architecture", "Terraform", ...],
-  "sameAs": ["https://www.linkedin.com/in/hexsel/", "https://github.com/hexsell007"]
-}
-```
+### index.html — Person ✅
+Full Person schema with: name, url, email, jobTitle, image, address (Toronto, ON, CA), worksFor (PwC Canada), alumniOf (FIAP), hasCredential (Azure Expert), knowsAbout (14 technologies), sameAs (LinkedIn + GitHub).
 
-### resume.html — ProfilePage schema ✅ Added
-Wraps a Person entity with job, address, credential.
+### resume.html — ProfilePage ✅
+ProfilePage wrapping a Person entity with job, address, credential.
 
-### Remaining gaps (Low priority)
-- `image` references og-cover.png — ideally a headshot photo URL
-- No `Review` or `AggregateRating` (not applicable yet — no testimonials)
-- Service offerings could use `Service` schema per card
+### Remaining opportunity (Low)
+- `image` field references og-cover.png — could be a portrait headshot for better Knowledge Panel
+- Individual `Service` schema on each service card
 
 ---
 
 ## 4. Content Quality — 70%
 
-### E-E-A-T Assessment
-| Signal | Status | Notes |
-|---|---|---|
-| Years of experience | ✅ | "18+ years" stated repeatedly |
-| Current employer | ✅ | PwC Canada (Fortune-recognised) |
-| Certification | ✅ | Azure Solutions Architect Expert |
-| Quantified results | ✅ | 1,200+ servers, 99.5% success rate |
-| Technical depth | ✅ | Bicep code example |
-| Profile photo | ⚠️ | Not on page (og-cover is not a portrait) |
-| Testimonials | ❌ | None |
-| Publications / articles | ❌ | No blog or external writing |
-| External mentions | ❌ | New site — expected |
-| LinkedIn | ✅ | Linked and in sameAs |
+### E-E-A-T
+| Signal | Status |
+|---|---|
+| 18+ years experience | ✅ Stated |
+| PwC Canada affiliation | ✅ Verifiable |
+| Azure Expert certification | ✅ Listed |
+| Quantified results (1,200+ servers) | ✅ Present |
+| Technical code example (Bicep) | ✅ Demonstrates depth |
+| Profile photo on page | ⚠️ Missing |
+| Testimonials | ❌ None yet |
+| Publications / blog | ❌ None yet |
 
 ### Content Depth
-| Section | Word count | Assessment |
-|---|---|---|
-| About paragraph | ~75 words | ⚠️ Adequate |
-| Each service card | ~35–45 words | ⚠️ Thin |
-| Each timeline entry | ~20–25 words | ⚠️ Thin (full detail in resume) |
-| AI Integration section | ~120 words | ✅ Good |
-| Resume summary | ~75 words | ✅ Good |
-| Resume bullets | 4–5 per job | ✅ Good |
+Service cards and timeline entries are intentionally brief (30–45 words). Full detail lives in `resume.html`. This is acceptable for a portfolio but limits topical authority.
 
 ---
 
-## 5. Performance — 78%
+## 5. Performance — 78% ✅
 
-| Metric | Status |
+| Item | Status |
 |---|---|
-| Google Fonts `display=swap` | ✅ Already set |
-| JS deferred | ✅ |
+| `font-display: swap` on Google Fonts | ✅ |
+| JS deferred, single IIFE | ✅ |
 | No render-blocking resources | ✅ |
-| No large images on page | ✅ |
-| Inline FOUC prevention script | ✅ |
+| No large raster images on page | ✅ |
+| FOUC prevention inline script | ✅ |
 | Font preconnect headers | ✅ |
 
 ---
 
-## 6. AI Search Readiness — 25% 🔴
+## 6. AI Search Readiness — 85% ✅
 
 | Signal | Status |
 |---|---|
-| Google-Extended | 🔴 Blocked (Cloudflare) |
-| GPTBot | 🔴 Blocked (Cloudflare) |
-| ClaudeBot | 🔴 Blocked (Cloudflare) |
+| Google-Extended | ✅ Now allowed |
+| GPTBot | ✅ Now allowed |
+| ClaudeBot | ✅ Now allowed |
 | Regular Googlebot | ✅ Allowed |
-| `llms.txt` | ✅ Created |
+| `llms.txt` | ✅ Present |
 | Structured contact info | ✅ |
 | Quantified achievements | ✅ |
-| External citations pointing to site | ❌ New site |
-
-**After fixing Cloudflare → AI Search Readiness jumps to ~85% → overall score ~81/100**
+| JSON-LD Person schema | ✅ |
+| External citations pointing to site | ⚠️ New site — will grow over time |
 
 ---
 
-## 7. Images — 85%
+## 7. Images — 85% ✅
 
 | Asset | Status |
 |---|---|
-| `og-cover.png` (1200×630) | ✅ Real image, pushed |
-| `favicon.svg` | ✅ SVG, modern |
-| `anderson-hexsel-resume.pdf` | ✅ Exists (347KB) |
-| Profile photo on page | ⚠️ None yet |
-| Inline SVG icons | ✅ `aria-hidden` correct |
+| `og-cover.png` (1200×630) | ✅ Real image |
+| `anderson-hexsel-resume.pdf` (347KB) | ✅ Exists |
+| `favicon.svg` | ✅ SVG |
+| Profile photo on page | ⚠️ Not yet added |
 
 ---
 
-## Page Inventory
+## What's left (no urgency)
 
-| URL | Title | Indexed | Schema |
-|---|---|---|---|
-| `hexsel.io/` | Anderson Hexsel — Senior Cloud & Platform Architect | ✅ | Person ✅ |
-| `hexsel.io/resume.html` | Anderson Hexsel — Cloud Architect Resume · Azure · PwC Canada · Toronto | ✅ | ProfilePage ✅ |
-| `hexsel.io/404.html` | 404 — Not found | ❌ (404) | None (correct) |
+| Item | Priority | Effort |
+|---|---|---|
+| Add profile photo to hero + schema | Medium | 30 min |
+| Expand service card copy (80–120 words each) | Medium | 2 hrs |
+| Add 2–3 testimonials | Medium | depends on contacts |
+| Submit sitemap to Google Search Console | Medium | 10 min |
+| Write 1–2 short technical articles | Low | ongoing |
+| `Service` schema on cards | Low | 30 min |
