@@ -134,6 +134,31 @@
 }
 .resume__skills dd { color: var(--text-2); }
 
+/* Mobile resume */
+@media (max-width: 639px) {
+  .resume-header__inner { gap: var(--s2); }
+  .resume-header__actions { gap: var(--s2); }
+  .resume-header__actions .btn { font-size: var(--fs-xs); padding: var(--s2) var(--s3); }
+
+  .resume { padding-block: var(--s10); }
+
+  .resume__name { font-size: clamp(1.75rem, 10vw, 2.25rem); }
+  .resume__contact { gap: var(--s3); }
+
+  .resume__section { margin-block: var(--s8); }
+
+  .resume__skills {
+    grid-template-columns: 1fr;
+    gap: var(--s3);
+  }
+  .resume__skills div {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: var(--s3);
+    align-items: baseline;
+  }
+}
+
 /* Print stylesheet */
 @media print {
   :root,
