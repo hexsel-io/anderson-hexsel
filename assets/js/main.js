@@ -203,6 +203,46 @@
     schedule(900);
   }
 
+  // ── Contact form (Formspree) ──────────────────────────────────
+  var contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    var submitBtn  = contactForm.querySelector('.form-submit');
+    var successMsg = contactForm.querySelector('.form-success');
+
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.classList.add('is-sending');
+      successMsg.textContent = '';
+      successMsg.className = 'form-success';
+
+      fetch(contactForm.action, {
+        method: 'POST',
+        body: new FormData(contactForm),
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(function (res) {
+        if (res.ok) {
+          contactForm.reset();
+          successMsg.textContent = '// message sent — I\'ll get back to you soon.';
+          successMsg.classList.add('is-ok');
+        } else {
+          return res.json().then(function (data) {
+            throw new Error(data.errors ? data.errors.map(function(e){return e.message;}).join(', ') : 'submission failed');
+          });
+        }
+      })
+      .catch(function (err) {
+        successMsg.textContent = '// error: ' + err.message + '. Try emailing directly.';
+        successMsg.classList.add('is-err');
+      })
+      .finally(function () {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('is-sending');
+      });
+    });
+  }
+
   // ── Footer year ───────────────────────────────────────────────
   var yearEl = document.getElementById('footer-year');
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
