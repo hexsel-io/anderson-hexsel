@@ -248,14 +248,14 @@ pre, code { font-family: var(--font-mono); }
 .nav__link:hover::after { width: 100%; }
 
 /* Mobile toggle */
-.nav__toggle { display: none; color: var(--text); padding: var(--s2); }
+.nav__toggle { display: none; color: var(--text); padding: var(--s2); min-width: 44px; min-height: 44px; }
 
 /* Header actions */
 .header-actions { display: flex; align-items: center; gap: var(--s3); flex-shrink: 0; }
 
 /* Theme toggle */
 .theme-toggle {
-  width: 34px; height: 34px;
+  width: 44px; height: 44px;
   display: flex; align-items: center; justify-content: center;
   color: var(--text-2);
   border-radius: var(--r-sm);
@@ -809,7 +809,8 @@ pre, code { font-family: var(--font-mono); }
   font-size: var(--fs-xs);
   color: var(--text-2);
   text-decoration: none;
-  padding: var(--s2) var(--s4);
+  padding: var(--s3) var(--s4);
+  min-height: 44px;
   border: 1px solid var(--border);
   border-radius: var(--r-md);
   transition: all 150ms;
