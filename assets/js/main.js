@@ -243,6 +243,84 @@
     });
   }
 
+  // ── Lightbox (Travels gallery) ────────────────────────────────
+  var lightbox = document.getElementById('lightbox');
+  var galleryBtns = Array.prototype.slice.call(document.querySelectorAll('.gallery__btn'));
+  if (lightbox && galleryBtns.length) {
+    var lbImg      = lightbox.querySelector('.lightbox__img');
+    var lbCaption  = lightbox.querySelector('.lightbox__caption');
+    var lbClose    = lightbox.querySelector('.lightbox__close');
+    var lbPrev     = lightbox.querySelector('.lightbox__nav--prev');
+    var lbNext     = lightbox.querySelector('.lightbox__nav--next');
+    var lbCounter  = lightbox.querySelector('.lightbox__counter');
+    var current    = 0;
+    var lastFocus  = null;
+
+    // Single-photo trips don't need prev/next arrows or a counter
+    var multi = galleryBtns.length > 1;
+    lbPrev.hidden = !multi;
+    lbNext.hidden = !multi;
+
+    function render(i) {
+      var btn = galleryBtns[i];
+      var img = btn.querySelector('.gallery__img');
+      lbImg.src = btn.getAttribute('data-full') || img.getAttribute('src');
+      lbImg.alt = img ? img.getAttribute('alt') : '';
+      lbCaption.textContent = btn.getAttribute('data-caption') || '';
+      lbCounter.textContent = multi ? (i + 1) + ' / ' + galleryBtns.length : '';
+    }
+
+    function open(i) {
+      current = i;
+      lastFocus = document.activeElement;
+      render(current);
+      lightbox.hidden = false;
+      // Force reflow so the transition runs
+      void lightbox.offsetWidth;
+      lightbox.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      lbClose.focus();
+      document.addEventListener('keydown', onKey);
+    }
+
+    function close() {
+      lightbox.classList.remove('is-open');
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', onKey);
+      var done = function () {
+        lightbox.hidden = true;
+        lbImg.src = '';
+        lightbox.removeEventListener('transitionend', done);
+      };
+      if (prefersReduced) { done(); }
+      else { lightbox.addEventListener('transitionend', done); }
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    function step(dir) {
+      if (!multi) return;
+      current = (current + dir + galleryBtns.length) % galleryBtns.length;
+      render(current);
+    }
+
+    function onKey(e) {
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowRight') step(1);
+      else if (e.key === 'ArrowLeft') step(-1);
+    }
+
+    galleryBtns.forEach(function (btn, i) {
+      btn.addEventListener('click', function () { open(i); });
+    });
+    lbClose.addEventListener('click', close);
+    lbPrev.addEventListener('click', function () { step(-1); });
+    lbNext.addEventListener('click', function () { step(1); });
+    lightbox.addEventListener('click', function (e) {
+      // Click on the dim backdrop (not the image or controls) closes
+      if (e.target === lightbox || e.target.classList.contains('lightbox__figure')) close();
+    });
+  }
+
   // ── Footer year ───────────────────────────────────────────────
   var yearEl = document.getElementById('footer-year');
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
